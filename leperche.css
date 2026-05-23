@@ -1,0 +1,451 @@
+/* =============================================================================
+   leperche — Patterns & Primitives
+   Texture, shape primitives, typography utilities, and component patterns.
+   Depends on tokens.css (load that first).
+
+   These classes implement the spec's surface/shape/component recipes so that
+   an agent can compose layouts from named primitives instead of re-deriving
+   geometry each time.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   BASE
+   ----------------------------------------------------------------------------- */
+body {
+  background-color: var(--color-surface-paper);
+  color: var(--color-ink-body);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* =============================================================================
+   3. TEXTURE & SURFACE
+   ============================================================================= */
+
+/* Fine paper grain for page / section backgrounds */
+.paper-surface {
+  background:
+    radial-gradient(var(--color-ink-texture) 1px, transparent 1px),
+    var(--color-surface-paper);
+  background-size: 17px 19px;
+}
+
+.cream-surface {
+  background:
+    radial-gradient(var(--color-ink-texture) 1px, transparent 1px),
+    var(--color-surface-cream);
+  background-size: 17px 19px;
+}
+
+/* Print-like overlay: dry-brush sheen + ink speckle. Apply to color fields. */
+.print-field {
+  position: relative;
+  overflow: hidden;
+}
+.print-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--texture-field-opacity);
+  background-image:
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.28) 48%, transparent 52%),
+    radial-gradient(rgba(36, 33, 29, 0.18) 0.7px, transparent 0.7px);
+  background-size: 130% 130%, 11px 13px;
+  mix-blend-mode: multiply;
+}
+
+/* Misregistration: slight layer offset for accent-only graphic moments */
+.misregister {
+  position: relative;
+}
+.misregister::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(var(--misregistration-offset), var(--misregistration-offset));
+  background: inherit;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  z-index: -1;
+}
+
+/* =============================================================================
+   4. SHAPE PRIMITIVES
+   Build graphics from these reusable forms, not subject-specific illustration.
+   Every shape must earn a compositional role; remove decorative blobs.
+   ============================================================================= */
+.shape {
+  display: block;
+}
+
+/* Anchor Mass — large rounded asymmetric field, main composition weight */
+.shape-anchor-mass {
+  border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
+}
+
+/* Soft Squircle — stable graphic block */
+.shape-soft-squircle {
+  border-radius: 30% 34% 28% 36% / 32% 26% 38% 30%;
+}
+
+/* Long Mass — tall vertical organic form, rhythm / section anchor */
+.shape-long-mass {
+  border-radius: 48% 42% 44% 50% / 12% 14% 18% 16%;
+}
+
+/* Sliver — small narrow shape, motion or label cue; slightly rotated */
+.shape-sliver {
+  border-radius: 64% 36% 72% 28% / 38% 62% 30% 70%;
+  transform: rotate(var(--shape-rotation, -8deg));
+}
+
+/* Cutout Shard — angular paper-like accent (clip-path, irregular) */
+.shape-cutout-shard {
+  clip-path: polygon(8% 0%, 100% 6%, 92% 100%, 0% 88%);
+}
+
+/* Cropped Field helper — let large shapes extend beyond the container edge */
+.shape-cropped {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Gesture Line — rough hand-drawn divider/outline */
+.gesture-line {
+  border: none;
+  height: 2px;
+  background: var(--color-ink);
+  opacity: var(--texture-line-opacity);
+  /* faint hand wobble via mask */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Negative Hole — cut-through void inside a mass (place over a field) */
+.shape-negative-hole {
+  background: var(--color-surface-paper);
+  border-radius: 50%;
+}
+
+/* =============================================================================
+   5. TYPOGRAPHY UTILITIES
+   Hierarchy through size + line height + placement, not many weights.
+   ============================================================================= */
+.type-display-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-display-hero);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-display-hero);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-ink);
+}
+.type-display-alt {
+  font-family: var(--font-display);
+  font-size: var(--text-display-alt);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-display-alt);
+  color: var(--color-ink);
+}
+.type-section {
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-section);
+  color: var(--color-ink);
+}
+.type-subheading {
+  font-family: var(--font-body);
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-subheading);
+  color: var(--color-ink);
+}
+.type-card-title {
+  font-family: var(--font-body);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-card-title);
+  color: var(--color-ink);
+}
+.type-body-large {
+  font-family: var(--font-body);
+  font-size: var(--text-body-large);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-body-large);
+  color: var(--color-ink-body);
+}
+.type-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-body);
+  color: var(--color-ink-body);
+}
+/* Metadata — the only place positive tracking belongs */
+.type-metadata {
+  font-family: var(--font-body);
+  font-size: var(--text-metadata);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-metadata);
+  letter-spacing: var(--tracking-metadata);
+  color: var(--color-ink-secondary);
+}
+/* Marginalia / personal note — short, editorial, never a script.
+   Light italic serif, lowercase, ink-secondary. Replaces the former
+   hand-script register so the editorial tone holds. */
+.type-hand {
+  font-family: var(--font-marginalia);
+  font-size: var(--text-hand);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--lh-hand);
+  color: var(--color-ink-secondary);
+  letter-spacing: 0;
+}
+
+/* =============================================================================
+   6. COMPONENTS
+   ============================================================================= */
+
+/* ---- Buttons --------------------------------------------------------------- */
+.btn {
+  font-family: var(--font-body);
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-button);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-standard);
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+/* Primary Ink — primary CTA */
+.btn-ink {
+  background: var(--color-ink);
+  color: var(--color-surface-paper);
+  border: var(--border-ink);
+  box-shadow: var(--shadow-inset-button);
+}
+.btn-ink:hover { opacity: 0.92; }
+
+/* Outline / Ghost — secondary action */
+.btn-outline {
+  background: transparent;
+  color: var(--color-ink);
+  border: var(--border-interactive);
+}
+.btn-outline:hover { background: var(--color-ink-faint); }
+
+/* Accent — high-emphasis, used sparingly. Set --btn-accent to an accent token */
+.btn-accent {
+  background: var(--btn-accent, var(--color-accent-vermilion));
+  color: var(--color-surface-paper);
+  border: 1px solid var(--btn-accent, var(--color-accent-vermilion));
+}
+.btn-accent:hover { opacity: 0.9; }
+
+/* Pill / Icon button */
+.btn-pill {
+  border-radius: var(--radius-pill);
+  padding: var(--space-2);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* ---- Cards & Containers ---------------------------------------------------- */
+/* Identity comes from adjacent graphic primitives, not card ornament.
+   No heavy shadow; avoid nesting cards. */
+.card {
+  background: var(--color-surface-paper);
+  border: var(--border-passive);
+  border-radius: var(--radius-comfortable);
+  padding: var(--space-6);
+}
+.card-cream {
+  background: var(--color-surface-cream);
+}
+
+/* ---- Inputs & Forms -------------------------------------------------------- */
+.input {
+  background: var(--color-surface-paper);
+  border: var(--border-passive);
+  border-radius: var(--radius-standard);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-ink-body);
+}
+.input::placeholder { color: var(--color-ink-secondary); }
+.input:focus-visible {
+  outline: none;
+  border-color: var(--color-accent-cobalt);
+  box-shadow: var(--shadow-focus);
+}
+
+/* ---- Navigation ------------------------------------------------------------ */
+.nav {
+  background: var(--color-surface-paper);
+  font-family: var(--font-body);
+  font-size: var(--text-button);
+}
+.nav-link {
+  color: var(--color-ink-body);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.nav-link:hover { opacity: 0.6; }
+.nav-link[aria-current="page"] {
+  color: var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+/* ---- Links ----------------------------------------------------------------- */
+.link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.link:hover { opacity: 0.7; } /* ink opacity, not random accent */
+
+/* =============================================================================
+   7. LAYOUT
+   ============================================================================= */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.section {
+  padding-block: var(--space-16);
+}
+@media (min-width: 1024px) {
+  .section { padding-block: var(--space-32); }
+}
+
+/* Two-column: text + graphic primitive */
+.split {
+  display: grid;
+  gap: var(--space-12);
+}
+@media (min-width: 768px) {
+  .split { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+/* Loose gallery for repeated primitives — not a rigid card wall */
+.gallery {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* =============================================================================
+   DISTINCTIVE COMPONENT — Graphic Hero Field
+   Paper surface, one cropped anchor mass, one support sliver, title in
+   negative space, small metadata block.
+   ============================================================================= */
+.hero-field {
+  position: relative;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.hero-field__anchor {
+  position: absolute;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  right: -10%;
+  top: -8%;
+  background: var(--color-accent-vermilion);
+  z-index: 0;
+}
+.hero-field__support {
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 1 / 2;
+  left: 6%;
+  bottom: -6%;
+  background: var(--color-accent-mint);
+  z-index: 0;
+}
+.hero-field__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* =============================================================================
+   POSTER FIELD — declared exception to the 70/17/8/5 ratio.
+   A full-bleed saturated background, paper-colored type, scattered shape
+   primitives. Use deliberately and sparingly: cover sections, campaign
+   headers, "this week" announcements — never base UI surfaces.
+   Pairs with --poster-bg (background) and --poster-ink (default paper).
+   ============================================================================= */
+.poster-field {
+  position: relative;
+  overflow: hidden;
+  background: var(--poster-bg, var(--color-accent-greenblack));
+  color: var(--poster-ink, var(--color-surface-paper));
+  isolation: isolate;
+}
+.poster-field h1, .poster-field h2, .poster-field h3,
+.poster-field h4, .poster-field h5, .poster-field h6,
+.poster-field p, .poster-field li, .poster-field a,
+.poster-field .lp-hero__lede,
+.poster-field .lp-section__title {
+  color: inherit;
+}
+.poster-field .lp-section__kicker,
+.poster-field .meta { color: rgba(255, 248, 234, 0.7); }
+
+/* Scattered cluster of cream circles, the signature poster motif.
+   Author with positioned children .poster-field__dot / .poster-field__sliver. */
+.poster-field__dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--poster-accent, rgba(255, 248, 234, 0.78));
+  pointer-events: none;
+}
+.poster-field__sliver {
+  position: absolute;
+  background: var(--poster-accent, var(--color-accent-coral));
+  border-radius: 48% 42% 44% 50% / 12% 14% 18% 16%;
+  pointer-events: none;
+}
+.poster-field__mass {
+  position: absolute;
+  background: var(--poster-mass, var(--color-accent-vermilion));
+  border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
+  pointer-events: none;
+}
+
+/* Default poster palettes — assign on the element with class or inline vars.
+   Each palette has:  --poster-bg (field),  --poster-accent (scattered dots),
+                      --poster-mass (one warm cropped anchor).
+   References followed: sormani (teal), gilberte (cobalt), yaya (blush+cobalt),
+   bien-ficelé (blush+vermilion), les bien-veillants (cobalt+blush). */
+.poster-teal       { --poster-bg: var(--color-poster-teal);    --poster-accent: #cfe1c2;                       --poster-mass: var(--color-accent-vermilion); }
+.poster-cobalt     { --poster-bg: var(--color-poster-cobalt);  --poster-accent: var(--color-poster-blush);     --poster-mass: var(--color-accent-vermilion); }
+.poster-blush      { --poster-bg: var(--color-poster-blush);   --poster-accent: var(--color-poster-cobalt);    --poster-mass: var(--color-accent-vermilion); }
+.poster-blush-warm { --poster-bg: var(--color-poster-blush);   --poster-accent: var(--color-accent-vermilion); --poster-mass: var(--color-accent-mint); }
+.poster-wine       { --poster-bg: var(--color-accent-wine);    --poster-accent: var(--color-poster-rose);      --poster-mass: var(--color-accent-mint); }
+.poster-greenblack { --poster-bg: var(--color-accent-greenblack); --poster-accent: var(--color-accent-sun);    --poster-mass: var(--color-accent-coral); }
+
+/* =============================================================================
+   ACCESSIBILITY / GUARDS
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Keep touch targets usable on small screens */
+@media (max-width: 640px) {
+  .btn { min-height: 44px; }
+}

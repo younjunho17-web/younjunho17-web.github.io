@@ -1,0 +1,181 @@
+/* =============================================================================
+   leperche — Design Tokens
+   Analog Editorial Graphic system. Single source of truth.
+
+   This file translates the leperche.md specification into machine-consumable
+   CSS custom properties. Prose-only rules (color ratios, contrast guards) are
+   preserved here as comments so the intent travels with the values.
+
+   Token naming is role + hue, never object category, so the system stays
+   reusable across subjects.
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     1. SURFACE — warm paper foundation (never pure white)
+     --------------------------------------------------------------------------- */
+  --color-surface-paper: #fff8ea;      /* main page background */
+  --color-surface-cream: #f3ead4;      /* section surface, secondary canvas */
+  --color-surface-parchment: #e7d9b7;  /* muted depth, dividers, low-emphasis areas */
+
+  /* ---------------------------------------------------------------------------
+     2. INK — one warm ink, stepped by opacity (never pure black)
+     A single hue (#24211d) derives the whole neutral scale, so grays stay
+     related rather than arbitrary.
+     --------------------------------------------------------------------------- */
+  --color-ink: #24211d;                          /* Ink 100 — text, headings, dark buttons, linework */
+  --color-ink-body: rgba(36, 33, 29, 0.82);      /* Ink 82  — body copy */
+  --color-ink-secondary: rgba(36, 33, 29, 0.64); /* Ink 64  — secondary text */
+  --color-ink-interactive: rgba(36, 33, 29, 0.40);/* Ink 40 — interactive borders, outline buttons */
+  --color-ink-border: rgba(36, 33, 29, 0.18);    /* Ink 18  — passive borders, dividers */
+  --color-ink-texture: rgba(36, 33, 29, 0.06);   /* Ink 6   — paper texture, faint overlays */
+  --color-ink-faint: rgba(36, 33, 29, 0.03);     /* Ink 3   — barely visible surface variation */
+
+  /* ---------------------------------------------------------------------------
+     3. ACCENTS — named by role + hue
+     Warm cluster anchors; cool cluster balances; grounding cluster weights.
+     Usage discipline: ONE dominant accent per section, a SECOND only to
+     balance. Deep colors ground — they are not full-page backgrounds.
+     --------------------------------------------------------------------------- */
+  /* warm */
+  --color-accent-vermilion: #e84d32;   /* strong warm anchor, active graphic field */
+  --color-accent-coral: #e58a7c;       /* softer warm support */
+  --color-accent-ochre: #f39a2d;       /* warm highlight, energetic not neon */
+  --color-accent-sun: #f5cf58;         /* light optimistic emphasis */
+  /* cool */
+  --color-accent-fresh-green: #4d8738; /* natural structural counterweight */
+  --color-accent-mint: #4fb594;        /* calm cool field */
+  --color-accent-olive: #a8bc68;       /* muted organic background tint */
+  --color-accent-cobalt: #1f5487;      /* cool contrast, sparingly used; focus rings */
+  /* grounding */
+  --color-accent-wine: #9f3f35;        /* deep warm grounding */
+  --color-accent-greenblack: #123f3c;  /* dark editorial alternative to charcoal */
+
+  /* ---------------------------------------------------------------------------
+     Color ratio guidance (composition contract, not enforceable in CSS):
+       65–75%  paper / cream surface
+       15–20%  one large saturated field
+       5–10%   secondary accent field
+       3–5%    ink linework, text, micro accents
+     Avoid: pure white, pure black, neon, glossy gradients.
+     --------------------------------------------------------------------------- */
+
+  /* ---------------------------------------------------------------------------
+     4. TYPOGRAPHY
+     One editorial serif (display), one neutral sans (body/UI), one rare hand.
+     --------------------------------------------------------------------------- */
+  --font-display: "MaruBuri", "Noto Serif KR", "Source Han Serif", Georgia, serif;
+  --font-body: "Pretendard", "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Marginalia / personal-note register — a quieter serif italic, not a script.
+     Synthesised italic on MaruBuri reads as a hand-set editorial note. */
+  --font-marginalia: "MaruBuri", "Noto Serif KR", Georgia, serif;
+  --font-hand: var(--font-marginalia); /* back-compat alias */
+
+  /* type scale — token-based, do NOT scale continuously with viewport */
+  --text-display-hero: 3.75rem;   /* 60px / 600 / lh 1.05 */
+  --text-display-alt: 3rem;       /* 48px / 500 / lh 1.08 */
+  --text-section: 2.25rem;        /* 36px / 600 / lh 1.12 */
+  --text-subheading: 1.5rem;      /* 24px / 600 / lh 1.25 */
+  --text-card-title: 1.25rem;     /* 20px / 500 / lh 1.30 */
+  --text-body-large: 1.125rem;    /* 18px / 400 / lh 1.45 */
+  --text-body: 1rem;              /* 16px / 400 / lh 1.55 */
+  --text-button: 0.9375rem;       /* 15px / 500 / lh 1.40 */
+  --text-metadata: 0.8125rem;     /* 13px / 400 / lh 1.35 / tracking 0.06em */
+  --text-hand: 1.375rem;          /* 22px / 300 italic / lh 1.25 — marginalia */
+
+  /* line heights */
+  --lh-display-hero: 1.05;
+  --lh-display-alt: 1.08;
+  --lh-section: 1.12;
+  --lh-subheading: 1.25;
+  --lh-card-title: 1.3;
+  --lh-body-large: 1.45;
+  --lh-body: 1.55;
+  --lh-button: 1.4;
+  --lh-metadata: 1.35;
+  --lh-hand: 1.25;
+
+  /* weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* tracking — normal for reading text; positive ONLY for metadata/labels */
+  --tracking-normal: 0;
+  --tracking-metadata: 0.06em;
+
+  /* ---------------------------------------------------------------------------
+     5. SPACING — base unit 4px
+     UI internals: 8–24px. Section spacing: 64–128px.
+     --------------------------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ---------------------------------------------------------------------------
+     6. RADIUS
+     Clean UI rectangles use the low end; graphic primitives use organic
+     percentage radii defined in leperche.css.
+     --------------------------------------------------------------------------- */
+  --radius-micro: 4px;     /* small controls */
+  --radius-standard: 6px;  /* buttons, inputs, compact UI */
+  --radius-comfortable: 8px;/* cards, panels */
+  --radius-pill: 9999px;   /* icon buttons, chips, toggles — not every rectangle */
+
+  /* ---------------------------------------------------------------------------
+     7. BORDERS & DEPTH
+     Depth is pressed into paper, not floating on glass. Prefer borders;
+     reserve shadow for focus / active / tactile buttons.
+     --------------------------------------------------------------------------- */
+  --border-passive: 1px solid var(--color-ink-border);
+  --border-interactive: 1px solid var(--color-ink-interactive);
+  --border-ink: 1px solid var(--color-ink);
+
+  --shadow-inset-button: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                         inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  --shadow-focus: 0 0 0 3px rgba(31, 84, 135, 0.35); /* cobalt focus ring */
+
+  /* ---------------------------------------------------------------------------
+     POSTER PALETTE — saturated tones used ONLY inside .poster-field.
+     These are not regular accents: they are the inverted-ratio exception
+     and may appear as the dominant background of one section per page.
+     --------------------------------------------------------------------------- */
+  --color-poster-teal:    #2a7a7e;
+  --color-poster-cobalt:  #2a3fb0;
+  --color-poster-blush:   #f3b5b0;  /* warm pink — never used outside .poster-* */
+  --color-poster-rose:    #f3d8c6;
+  --color-poster-cream:   #fff8ea;  /* alias for paper, used as a dot color */
+
+  /* ---------------------------------------------------------------------------
+     8. TEXTURE intensity (used by leperche.css)
+     Texture must never drop text contrast below readable levels.
+     --------------------------------------------------------------------------- */
+  --texture-grain-opacity: 0.055;   /* range 0.03–0.08 */
+  --texture-field-opacity: 0.10;    /* range 0.06–0.14 */
+  --texture-line-opacity: 0.8;      /* range 0.65–0.9 */
+  --misregistration-offset: 2px;    /* range 1–4px */
+
+  /* ---------------------------------------------------------------------------
+     9. LAYOUT
+     --------------------------------------------------------------------------- */
+  --container-min: 1120px;
+  --container-max: 1240px;
+}
+
+/* =============================================================================
+   RESPONSIVE — token adjustments, not continuous scaling
+   Reduce decorative texture on small screens; type sizes stay token-based.
+   ============================================================================= */
+@media (max-width: 640px) {
+  :root {
+    --texture-grain-opacity: 0.04;
+    --texture-field-opacity: 0.07;
+  }
+}

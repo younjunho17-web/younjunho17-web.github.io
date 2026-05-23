@@ -1,170 +1,15 @@
-/* ============================================================
-   leperche — analog editorial graphic design system
-   ============================================================ */
+/* =============================================================================
+   younjunho — site styles
+   Rides on the Leperche foundation:
+     fonts.css → tokens.css → colors_and_type.css → leperche.css → THIS FILE
+   This file holds layout + composition that is specific to this site.
+   ============================================================================= */
 
-:root {
-  /* Surfaces */
-  --color-surface-paper: #fff8ea;
-  --color-surface-cream: #f3ead4;
-  --color-surface-parchment: #e7d9b7;
-
-  /* Ink scale */
-  --color-ink: #24211d;
-  --color-ink-body: rgba(36, 33, 29, 0.82);
-  --color-ink-secondary: rgba(36, 33, 29, 0.64);
-  --color-ink-interactive: rgba(36, 33, 29, 0.40);
-  --color-ink-border: rgba(36, 33, 29, 0.18);
-  --color-ink-texture: rgba(36, 33, 29, 0.06);
-
-  /* Accents */
-  --color-accent-vermilion: #e84d32;
-  --color-accent-coral: #e58a7c;
-  --color-accent-ochre: #f39a2d;
-  --color-accent-sun: #f5cf58;
-  --color-accent-fresh-green: #4d8738;
-  --color-accent-mint: #4fb594;
-  --color-accent-olive: #a8bc68;
-  --color-accent-cobalt: #1f5487;
-  --color-accent-wine: #9f3f35;
-  --color-accent-greenblack: #123f3c;
-
-  /* Type families */
-  --font-display: "Noto Serif KR", "Source Han Serif", Georgia, serif;
-  --font-body: "Pretendard", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-hand: "Nanum Pen Script", "Caveat", cursive;
-
-  /* Spacing */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-24: 96px;
-  --space-32: 128px;
-
-  /* Layout */
-  --content-max: 1180px;
-  --radius-micro: 4px;
-  --radius-standard: 6px;
-  --radius-comfortable: 8px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--color-ink-body);
-  background-color: var(--color-surface-paper);
-  background-image:
-    radial-gradient(rgba(36, 33, 29, 0.055) 1px, transparent 1px);
-  background-size: 17px 19px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-::selection {
-  background: var(--color-accent-sun);
-  color: var(--color-ink);
-}
-
-a {
-  color: var(--color-ink);
-  text-decoration: none;
-  border-bottom: 1px solid var(--color-ink-interactive);
-  transition: border-color 160ms ease, opacity 160ms ease;
-}
-
-a:hover {
-  border-bottom-color: var(--color-ink);
-}
-
-/* ============================================================
-   Typography
-   ============================================================ */
-
-h1, h2, h3 {
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  margin: 0;
-  font-weight: 600;
-}
-
-.display-hero {
-  font-size: clamp(2.5rem, 6vw, 3.75rem);
-  line-height: 1.05;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.display-alt {
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  line-height: 1.08;
-  font-weight: 500;
-}
-
-.section-heading {
-  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-  line-height: 1.12;
-  font-weight: 600;
-}
-
-.sub-heading {
-  font-family: var(--font-body);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--color-ink);
-}
-
-.card-title {
-  font-family: var(--font-body);
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--color-ink);
-  margin: 0;
-}
-
-.body-large {
-  font-size: 1.125rem;
-  line-height: 1.45;
-}
-
-.metadata {
-  font-size: 0.8125rem;
-  line-height: 1.35;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-ink-secondary);
-}
-
-.hand-mark {
-  font-family: var(--font-hand);
-  font-size: 1.5rem;
-  line-height: 1.1;
-  color: var(--color-ink);
-}
-
-/* ============================================================
-   Layout shell
-   ============================================================ */
-
+/* -----------------------------------------------------------------------------
+   Layout shell — narrower than Leperche default; DB index reads better short.
+   ----------------------------------------------------------------------------- */
 .shell {
-  max-width: var(--content-max);
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 var(--space-6);
 }
@@ -175,45 +20,50 @@ h1, h2, h3 {
   }
 }
 
-/* ============================================================
-   Top nav
-   ============================================================ */
+/* Generic metadata helper — same look as colors_and_type's .meta/<small>. */
+.metadata {
+  font-size: var(--text-metadata);
+  line-height: var(--lh-metadata);
+  letter-spacing: var(--tracking-metadata);
+  text-transform: uppercase;
+  color: var(--fg3);
+}
 
+/* -----------------------------------------------------------------------------
+   Top nav — baseline-aligned wordmark + links, no card chrome.
+   ----------------------------------------------------------------------------- */
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: var(--space-8);
-  padding-bottom: var(--space-4);
+  padding: var(--space-8) 0 var(--space-4);
+  background: transparent;
 }
 
 .nav-mark {
-  font-family: var(--font-display);
+  font-family: var(--serif-display);
   font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-ink);
-  border-bottom: none;
+  font-weight: var(--weight-semibold);
+  color: var(--fg1);
+  text-decoration: none;
 }
+.nav-mark:hover { opacity: 0.65; }
 
 .nav-links {
   display: flex;
   gap: var(--space-6);
-  font-size: 0.9375rem;
+  font-size: var(--text-button);
 }
-
 .nav-links a {
-  border-bottom: none;
-  color: var(--color-ink-body);
+  color: var(--fg2);
+  text-decoration: none;
 }
+.nav-links a:hover { opacity: 0.65; }
 
-.nav-links a:hover {
-  color: var(--color-ink);
-}
-
-/* ============================================================
-   Hero — graphic field with anchor mass
-   ============================================================ */
-
+/* -----------------------------------------------------------------------------
+   Hero — paper field with anchor mass + support + sliver (no produce, just
+   compositional masses). Calmer than .hero-field default — DB tone.
+   ----------------------------------------------------------------------------- */
 .hero {
   position: relative;
   padding: var(--space-16) 0 var(--space-24);
@@ -236,29 +86,27 @@ h1, h2, h3 {
   }
 }
 
-.hero-eyebrow {
-  margin-bottom: var(--space-6);
-}
+.hero-eyebrow { margin-bottom: var(--space-6); }
 
-.hero-title {
-  margin-bottom: var(--space-6);
+.display-hero {
+  font-family: var(--serif-display);
+  font-size: clamp(2.5rem, 6vw, var(--text-display-hero));
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-display-hero);
+  color: var(--fg1);
+  margin: 0 0 var(--space-6);
+  text-wrap: balance;
 }
 
 .hero-lede {
-  font-size: 1.125rem;
-  line-height: 1.55;
-  color: var(--color-ink-body);
+  font-size: var(--text-body-large);
+  line-height: var(--lh-body-large);
+  color: var(--fg2);
   max-width: 38ch;
-  margin: 0 0 var(--space-8);
+  margin: 0;
+  text-wrap: pretty;
 }
 
-.hero-meta {
-  display: flex;
-  gap: var(--space-6);
-  flex-wrap: wrap;
-}
-
-/* Anchor mass — primary identity shape */
 .hero-graphic {
   position: relative;
   min-height: 320px;
@@ -267,24 +115,24 @@ h1, h2, h3 {
   justify-content: center;
 }
 
+/* Anchor mass — vermilion organic blob, the visual weight of the hero. */
 .anchor-mass {
   position: relative;
   width: min(420px, 90%);
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-vermilion);
+  background: var(--accent-warm);
   border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
   transform: rotate(-6deg);
 }
-
 .anchor-mass::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: var(--texture-field-opacity);
   background-image:
     linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.28) 48%, transparent 52%),
-    radial-gradient(rgba(36, 33, 29, 0.22) 0.7px, transparent 0.7px);
+    radial-gradient(rgba(36, 33, 29, 0.18) 0.7px, transparent 0.7px);
   background-size: 130% 130%, 11px 13px;
   mix-blend-mode: multiply;
   border-radius: inherit;
@@ -294,7 +142,7 @@ h1, h2, h3 {
   position: absolute;
   width: 140px;
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-mint);
+  background: var(--accent-cool);
   border-radius: 64% 36% 72% 28% / 38% 62% 30% 70%;
   transform: rotate(14deg);
   top: 8%;
@@ -306,7 +154,7 @@ h1, h2, h3 {
   position: absolute;
   width: 80px;
   height: 16px;
-  background: var(--color-accent-sun);
+  background: var(--accent-sun);
   border-radius: 64% 36% 72% 28% / 38% 62% 30% 70%;
   transform: rotate(-22deg);
   bottom: 18%;
@@ -314,18 +162,14 @@ h1, h2, h3 {
   z-index: 3;
 }
 
-/* ============================================================
+/* -----------------------------------------------------------------------------
    Section rhythm
-   ============================================================ */
-
+   ----------------------------------------------------------------------------- */
 section {
   padding: var(--space-16) 0;
 }
-
-@media (min-width: 768px) {
-  section {
-    padding: var(--space-24) 0;
-  }
+@media (min-width: 1024px) {
+  section { padding: var(--space-24) 0; }
 }
 
 .section-head {
@@ -336,29 +180,17 @@ section {
   max-width: 720px;
 }
 
-.section-head .metadata {
-  color: var(--color-ink-secondary);
-}
-
-.section-head p {
-  margin: 0;
-  color: var(--color-ink-body);
-  font-size: 1.0625rem;
-  line-height: 1.55;
-}
-
-/* ============================================================
-   Project gallery — loose grid, each card has its own accent
-   ============================================================ */
-
-.gallery {
+/* -----------------------------------------------------------------------------
+   Index gallery — 2-col grid (override Leperche's auto-fit), each card has a
+   compositional thumb made of abstract masses (NOT produce silhouettes).
+   ----------------------------------------------------------------------------- */
+.index-gallery {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-12);
 }
-
 @media (min-width: 720px) {
-  .gallery {
+  .index-gallery {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-12) var(--space-8);
   }
@@ -375,20 +207,19 @@ section {
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-comfortable);
   overflow: hidden;
-  border: 1px solid var(--color-ink-border);
-  background: var(--color-surface-cream);
+  border: var(--border-passive);
+  background: var(--bg-cream);
 }
 
 .project-thumb .field {
   position: absolute;
   inset: 0;
 }
-
 .project-thumb .field::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.1;
+  opacity: var(--texture-field-opacity);
   background-image:
     linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.28) 48%, transparent 52%),
     radial-gradient(rgba(36, 33, 29, 0.18) 0.7px, transparent 0.7px);
@@ -396,13 +227,14 @@ section {
   mix-blend-mode: multiply;
 }
 
-/* Per-card composition presets */
-.project-thumb.preset-a .field        { background: var(--color-accent-ochre); }
+/* Per-card composition presets — abstract masses only, no subject-specific
+   illustration. Each preset uses one warm/cool/grounding accent. */
+.project-thumb.preset-a .field { background: var(--accent-highlight); }
 .project-thumb.preset-a .shape-a {
   position: absolute;
   width: 58%;
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-greenblack);
+  background: var(--accent-ground-cool);
   border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
   left: -8%;
   bottom: -16%;
@@ -412,19 +244,19 @@ section {
   position: absolute;
   width: 30%;
   aspect-ratio: 1 / 1;
-  background: var(--color-surface-paper);
+  background: var(--bg-paper);
   border-radius: 64% 36% 72% 28% / 38% 62% 30% 70%;
   right: 12%;
   top: 14%;
   transform: rotate(-12deg);
 }
 
-.project-thumb.preset-b .field        { background: var(--color-surface-cream); }
+.project-thumb.preset-b .field { background: var(--bg-cream); }
 .project-thumb.preset-b .shape-a {
   position: absolute;
   width: 70%;
   aspect-ratio: 4 / 5;
-  background: var(--color-accent-cobalt);
+  background: var(--accent-focus);
   border-radius: 30% 34% 28% 36% / 32% 26% 38% 30%;
   right: -10%;
   top: 10%;
@@ -434,18 +266,18 @@ section {
   position: absolute;
   width: 28%;
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-coral);
+  background: var(--accent-warm-soft);
   border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
   left: 16%;
   bottom: 14%;
 }
 
-.project-thumb.preset-c .field        { background: var(--color-accent-mint); }
+.project-thumb.preset-c .field { background: var(--accent-cool); }
 .project-thumb.preset-c .shape-a {
   position: absolute;
   width: 44%;
   aspect-ratio: 2 / 3;
-  background: var(--color-accent-wine);
+  background: var(--accent-ground-warm);
   border-radius: 48% 42% 44% 50% / 12% 14% 18% 16%;
   left: 14%;
   top: 12%;
@@ -455,19 +287,19 @@ section {
   position: absolute;
   width: 36%;
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-sun);
+  background: var(--accent-sun);
   border-radius: 64% 36% 72% 28% / 38% 62% 30% 70%;
   right: 8%;
   bottom: 8%;
   transform: rotate(18deg);
 }
 
-.project-thumb.preset-d .field        { background: var(--color-accent-parchment, var(--color-surface-parchment)); }
+.project-thumb.preset-d .field { background: var(--bg-parchment); }
 .project-thumb.preset-d .shape-a {
   position: absolute;
   width: 80%;
   aspect-ratio: 3 / 2;
-  background: var(--color-accent-vermilion);
+  background: var(--accent-warm);
   border-radius: 30% 34% 28% 36% / 32% 26% 38% 30%;
   left: -10%;
   bottom: -10%;
@@ -476,7 +308,7 @@ section {
   position: absolute;
   width: 22%;
   aspect-ratio: 1 / 1;
-  background: var(--color-accent-fresh-green);
+  background: var(--accent-cool-deep);
   border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
   right: 10%;
   top: 16%;
@@ -487,109 +319,33 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  color: var(--color-ink-secondary);
+  color: var(--fg3);
+}
+
+.card-title {
+  font-family: var(--sans-body);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-card-title);
+  color: var(--fg1);
+  margin: 0;
 }
 
 .project-body {
   margin: 0;
   font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--color-ink-body);
+  line-height: var(--lh-body);
+  color: var(--fg2);
   max-width: 52ch;
 }
 
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.tag {
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border: 1px solid var(--color-ink-border);
-  border-radius: 9999px;
-  color: var(--color-ink-secondary);
-}
-
-/* ============================================================
-   About — editorial info block
-   ============================================================ */
-
-.about {
-  position: relative;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-12);
-  align-items: start;
-}
-
-@media (min-width: 900px) {
-  .about-grid {
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: var(--space-16);
-  }
-}
-
-.about-body p {
-  margin: 0 0 var(--space-4);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--color-ink-body);
-}
-
-.about-graphic {
-  position: relative;
-  min-height: 280px;
-}
-
-.about-shape-1 {
-  position: absolute;
-  width: 70%;
-  aspect-ratio: 1 / 1;
-  background: var(--color-accent-olive);
-  border-radius: 45% 55% 52% 48% / 50% 44% 56% 50%;
-  top: 10%;
-  right: 4%;
-  transform: rotate(-8deg);
-}
-
-.about-shape-2 {
-  position: absolute;
-  width: 36%;
-  aspect-ratio: 1 / 1;
-  background: var(--color-accent-vermilion);
-  border-radius: 30% 34% 28% 36% / 32% 26% 38% 30%;
-  bottom: 6%;
-  left: 6%;
-  transform: rotate(12deg);
-}
-
-/* Gesture line divider */
-.gesture-line {
-  display: block;
-  width: 64px;
-  height: 1px;
-  background: var(--color-ink);
-  margin: var(--space-4) 0;
-  border: none;
-  opacity: 0.7;
-}
-
-/* ============================================================
-   Contact strip
-   ============================================================ */
-
-.contact {
-  background: var(--color-surface-cream);
-  border-top: 1px solid var(--color-ink-border);
-  border-bottom: 1px solid var(--color-ink-border);
+/* -----------------------------------------------------------------------------
+   Contact — one poster-field moment per page (the editorial climax).
+   Cobalt background, paper-cream type, scatter dots in blush.
+   ----------------------------------------------------------------------------- */
+.contact.poster-field {
+  border-top: var(--border-passive);
+  border-bottom: var(--border-passive);
 }
 
 .contact-grid {
@@ -597,8 +353,9 @@ section {
   grid-template-columns: 1fr;
   gap: var(--space-8);
   align-items: end;
+  position: relative;
+  z-index: 1;
 }
-
 @media (min-width: 720px) {
   .contact-grid {
     grid-template-columns: 1.4fr 1fr;
@@ -615,33 +372,37 @@ section {
   display: inline-flex;
   align-items: baseline;
   gap: var(--space-3);
-  font-size: 1.0625rem;
-  color: var(--color-ink);
-  border-bottom: none;
+  font-size: var(--text-body-large);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
 }
+.contact-link:hover { opacity: 0.65; }
 
 .contact-link .label {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: var(--text-metadata);
+  letter-spacing: var(--tracking-metadata);
   text-transform: uppercase;
-  color: var(--color-ink-secondary);
+  opacity: 0.7;
   min-width: 64px;
 }
 
 .contact-link .value {
-  border-bottom: 1px solid var(--color-ink-interactive);
+  border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
-  transition: border-color 160ms ease;
+  opacity: 0.92;
 }
 
-.contact-link:hover .value {
-  border-bottom-color: var(--color-ink);
-}
+/* Scatter dots for the contact poster — small cream circles. */
+.contact .poster-field__dot { background: var(--poster-accent, rgba(255, 248, 234, 0.78)); }
+.contact .dot-1 { width: 96px; height: 96px; top: -40px; right: 10%; }
+.contact .dot-2 { width: 36px; height: 36px; top: 30%; right: 28%; }
+.contact .dot-3 { width: 56px; height: 56px; bottom: -28px; left: 12%; }
+.contact .dot-4 { width: 24px; height: 24px; bottom: 22%; right: 6%; }
 
-/* ============================================================
+/* -----------------------------------------------------------------------------
    Footer
-   ============================================================ */
-
+   ----------------------------------------------------------------------------- */
 .footer {
   padding: var(--space-12) 0 var(--space-16);
   display: flex;
@@ -649,23 +410,17 @@ section {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-4);
-  color: var(--color-ink-secondary);
-  font-size: 0.8125rem;
+  color: var(--fg3);
+  font-size: var(--text-metadata);
   letter-spacing: 0.04em;
 }
 
-/* ============================================================
-   Responsive trims — reduce decoration on small screens
-   ============================================================ */
-
+/* -----------------------------------------------------------------------------
+   Responsive trims
+   ----------------------------------------------------------------------------- */
 @media (max-width: 600px) {
-  .support-mass {
-    width: 96px;
-  }
-  .sliver-mark {
-    width: 56px;
-  }
-  .about-shape-2 {
-    display: none;
-  }
+  .support-mass { width: 96px; }
+  .sliver-mark  { width: 56px; }
+  .contact .dot-1 { width: 64px; height: 64px; }
+  .contact .dot-2 { display: none; }
 }
