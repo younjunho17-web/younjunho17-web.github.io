@@ -244,11 +244,6 @@ h1, h2, h3 {
   margin-bottom: var(--space-6);
 }
 
-.hero-title em {
-  font-style: italic;
-  color: var(--color-accent-vermilion);
-}
-
 .hero-lede {
   font-size: 1.125rem;
   line-height: 1.55;
