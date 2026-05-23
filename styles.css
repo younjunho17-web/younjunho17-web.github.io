@@ -200,7 +200,31 @@ section {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  position: relative;
 }
+
+/* Whole card becomes clickable via an overlay anchored on the title link.
+   Keeps semantics: link wraps only the title text, but hit target = card. */
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-comfortable);
+}
+.card-link:focus-visible {
+  outline: none;
+}
+.card-link:focus-visible::after {
+  box-shadow: var(--shadow-focus);
+}
+
+.project-card:hover .project-thumb { opacity: 0.85; }
+.project-card:hover .card-title    { opacity: 0.65; }
+.project-thumb, .card-title { transition: opacity 0.15s ease; }
 
 .project-thumb {
   position: relative;
@@ -413,6 +437,37 @@ section {
   color: var(--fg3);
   font-size: var(--text-metadata);
   letter-spacing: 0.04em;
+}
+
+/* -----------------------------------------------------------------------------
+   Category subpages — compact page head + empty state
+   ----------------------------------------------------------------------------- */
+.category-head {
+  padding: var(--space-12) 0 var(--space-8);
+}
+@media (min-width: 1024px) {
+  .category-head { padding: var(--space-16) 0 var(--space-12); }
+}
+.category-head .metadata { display: inline-block; }
+.category-head .gesture-line {
+  width: 64px;
+  margin: var(--space-3) 0 var(--space-4);
+}
+.category-head .display-hero { margin: 0 0 var(--space-4); }
+.category-head .hero-lede {
+  font-size: var(--text-body-large);
+  line-height: var(--lh-body-large);
+  color: var(--fg2);
+  max-width: 48ch;
+  margin: 0;
+}
+
+.empty-state {
+  padding: var(--space-16) 0;
+  display: flex;
+  justify-content: center;
+  color: var(--fg3);
+  border-top: var(--border-passive);
 }
 
 /* -----------------------------------------------------------------------------
