@@ -1,36 +1,36 @@
 # younjunho17-web.github.io
 
-[Quartz 4](https://quartz.jzhao.xyz/)로 빌드되는 개인 위키.
-소스 노트는 별도 Obsidian vault에 있고, `publish: true` 가 켜진 것만 `content/`로 동기화돼 GitHub Pages로 배포된다.
+Jekyll 블로그 (Twenty Ten 스타일). 글은 Obsidian `Blog` vault에서 쓰고, 이 repo로는 퍼블리시만 한다.
 
 - Live: https://younjunho17-web.github.io
-- Vault: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude/`
-- 기존 Leperche 사이트: `leperche-archive` 브랜치
+- Vault: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Blog/`
+- 이전 사이트: `quartz-archive`(Quartz 위키), `leperche-archive` 브랜치
 
-## Workflow
+## 글 쓰기 → 게시
 
-1. Obsidian에서 노트 작성 — vault에 모든 것이 살고, 일부만 `publish: true`
-2. 게시 준비됐으면:
-   ```bash
-   bin/sync-vault.py            # vault → content/ 동기화
-   git add content && git commit -m "publish: ..."
-   git push
+1. Obsidian `Blog` vault에서 노트 작성. Properties(front matter)는 전부 선택:
+   ```yaml
+   title: 제목            # 없으면 파일명
+   date: 2026-10-04 15:30 # 없으면 파일 생성 시각
+   categories: [일상]
+   tags: [a, b]
+   slug: english-url      # 없으면 파일명이 주소가 됨
+   draft: true            # 게시 제외
    ```
-3. GitHub Action이 `npx quartz build` 후 Pages로 배포
+   쓰는 중인 글은 `_drafts/` 폴더에 두거나 `draft: true`. 본문의 `<!--more-->` 위까지만 첫 화면에 나온다.
+2. 게시: `bin/publish.py` (vault → `_posts/` 변환 + commit + push). 1~2분 뒤 반영.
 
-`bin/sync-vault.py --dry-run` 으로 무엇이 바뀔지 먼저 확인 가능.
+`_posts/`와 `assets/posts/`는 매번 vault에서 새로 만들어지므로 손으로 고치지 않는다.
 
-## Local preview
+## 로컬 미리보기
 
 ```bash
-bin/sync-vault.py
-npx quartz build --serve     # http://localhost:8080
+bin/publish.py --no-push
+PATH=/opt/homebrew/opt/ruby/bin:$PATH bundle exec jekyll serve   # http://localhost:4000
 ```
 
-## Vault 규약
+## 꾸미기
 
-vault 루트의 `CLAUDE.md` 참고. 요약:
-
-- Front-matter `publish: true` 인 노트만 사이트로 나감
-- `daily/`, `_drafts/`, `_meta/`, `templates/` 폴더는 통째로 제외
-- 카테고리: `radiology`, `pathology`, `infectious-disease`, `career`
+- 색·폰트: `assets/style.css` 맨 위 `:root` 변수
+- 헤더 사진: `assets/header.jpg` 교체 (940×198 비율)
+- 사이트 제목·태그라인·Blogroll: `_config.yml`

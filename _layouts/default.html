@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  {% feed_meta %}
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div id="branding">
+      <h1 id="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+      {% if site.description %}<div id="site-description">{{ site.description }}</div>{% endif %}
+      <img src="{{ '/assets/header.jpg' | relative_url }}" alt="" width="940" height="198">
+    </div>
+    <div id="access">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/archives/' | relative_url }}">Archives</a></li>
+        <li><a href="{{ '/categories/' | relative_url }}">Categories</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="container">
+      <div id="content">
+        {{ content }}
+      </div>
+    </div>
+    {% include sidebar.html %}
+  </div>
+
+  <div id="footer">
+    <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <span class="generator">Proudly powered by <a href="https://jekyllrb.com/">Jekyll</a></span>
+  </div>
+</div>
+</body>
+</html>

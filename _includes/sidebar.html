@@ -1,0 +1,60 @@
+<div id="primary" class="widget-area">
+  <ul class="xoxo">
+    <li class="widget">
+      <form role="search" action="https://www.google.com/search" method="get" class="searchform">
+        <input type="hidden" name="sitesearch" value="{{ site.url | remove: 'https://' }}">
+        <input type="text" name="q" aria-label="Search">
+        <input type="submit" value="Search">
+      </form>
+    </li>
+
+    <li class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        {% for p in site.posts limit: 5 %}
+        <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li class="widget">
+      <h3 class="widget-title">Archives</h3>
+      <ul>
+        {% assign months = site.posts | group_by_exp: "p", "p.date | date: '%Y-%m'" %}
+        {% for m in months %}
+        <li><a href="{{ '/archives/' | relative_url }}#{{ m.name }}">{{ m.items.first.date | date: "%B %Y" }}</a> ({{ m.size }})</li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    {% if site.categories.size > 0 %}
+    <li class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <ul>
+        {% assign cats = site.categories | sort %}
+        {% for c in cats %}
+        <li><a href="{{ '/categories/' | relative_url }}#{{ c[0] | slugify: 'unicode' }}">{{ c[0] }}</a> ({{ c[1].size }})</li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+
+    {% if site.blogroll %}
+    <li class="widget">
+      <h3 class="widget-title">Blogroll</h3>
+      <ul>
+        {% for b in site.blogroll %}
+        <li><a href="{{ b.url }}">{{ b.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+
+    <li class="widget">
+      <h3 class="widget-title">Meta</h3>
+      <ul>
+        <li><a href="{{ '/feed.xml' | relative_url }}">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>

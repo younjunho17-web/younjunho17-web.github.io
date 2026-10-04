@@ -1,0 +1,35 @@
+{% comment %} 글 하나. include 호출 시 p=글, full=true면 본문 전체 {% endcomment %}
+{% assign p = include.p %}
+<div class="post">
+  {% if include.full %}
+  <h1 class="entry-title">{{ p.title }}</h1>
+  {% else %}
+  <h2 class="entry-title"><a href="{{ p.url | relative_url }}" rel="bookmark">{{ p.title }}</a></h2>
+  {% endif %}
+  <div class="entry-meta">
+    <span class="meta-prep">Posted on</span>
+    <a href="{{ p.url | relative_url }}" rel="bookmark"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%B %-d, %Y" }}</time></a>
+    <span class="meta-sep">by</span> <span class="author">{{ site.author }}</span>
+  </div>
+  <div class="entry-content">
+    {% if include.full == nil and p.content contains site.excerpt_separator %}
+      {{ p.excerpt }}
+      <p><a href="{{ p.url | relative_url }}" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+    {% else %}
+      {{ p.content }}
+    {% endif %}
+  </div>
+  {% if p.categories.size > 0 or p.tags.size > 0 %}
+  <div class="entry-utility">
+    {% if p.categories.size > 0 %}
+    <span class="cat-links">Posted in
+      {% for c in p.categories %}<a href="{{ '/categories/' | relative_url }}#{{ c | slugify: 'unicode' }}">{{ c }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}
+    </span>
+    {% endif %}
+    {% if p.categories.size > 0 and p.tags.size > 0 %}<span class="meta-sep">|</span>{% endif %}
+    {% if p.tags.size > 0 %}
+    <span class="tag-links">Tagged {{ p.tags | join: ", " }}</span>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>

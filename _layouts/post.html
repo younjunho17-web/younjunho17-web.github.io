@@ -1,0 +1,8 @@
+---
+layout: default
+---
+{% include entry.html p=page full=true %}
+<div id="nav-below" class="navigation">
+  {% if page.previous %}<div class="nav-previous"><a href="{{ page.previous.url | relative_url }}"><span class="meta-nav">&larr;</span> {{ page.previous.title }}</a></div>{% endif %}
+  {% if page.next %}<div class="nav-next"><a href="{{ page.next.url | relative_url }}">{{ page.next.title }} <span class="meta-nav">&rarr;</span></a></div>{% endif %}
+</div>

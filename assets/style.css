@@ -1,0 +1,187 @@
+/* Twenty Ten (WordPress 3.0, 2010) 골격을 따른 스타일.
+   색·폰트는 아래 변수만 고치면 전체가 바뀐다. */
+:root {
+  --bg: #f1f1f1;
+  --page: #fff;
+  --text: #333;
+  --heading: #000;
+  --muted: #888;
+  --link: #0066cc;
+  --link-visited: #743399;
+  --link-hover: #ff4b33;
+  --rule: #000;
+  --hairline: #e7e7e7;
+  --menu-bg: #000;
+  --menu-text: #aaa;
+  --menu-hover-bg: #333;
+  --menu-hover-text: #fff;
+
+  --serif: Georgia, "Bitstream Charter", "Nanum Myeongjo", AppleMyungjo, serif;
+  --sans: "Helvetica Neue", Arial, Helvetica, "Apple SD Gothic Neo", "Nanum Gothic", sans-serif;
+}
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  padding: 0 0 2em;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.75 var(--serif);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+a:link { color: var(--link); }
+a:visited { color: var(--link-visited); }
+a:hover, a:focus, a:active { color: var(--link-hover); }
+
+#wrapper {
+  width: 940px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+  background: var(--page);
+}
+
+/* Header */
+#header { padding: 30px 0 0; }
+#branding::after { content: ""; display: block; clear: both; }
+#site-title {
+  float: left;
+  margin: 0 0 18px;
+  font-size: 30px;
+  line-height: 36px;
+  width: 700px;
+}
+#site-title a { color: var(--heading); font-weight: bold; text-decoration: none; }
+#site-description {
+  float: right;
+  clear: right;
+  width: 220px;
+  margin: 15px 0 18px;
+  color: var(--text);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#branding img {
+  clear: both;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-top: 4px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Menu bar */
+#access { background: var(--menu-bg); margin: 0 auto; }
+#access ul { list-style: none; margin: 0 0 0 12px; padding: 0; display: flex; flex-wrap: wrap; }
+#access a {
+  display: block;
+  padding: 0 10px;
+  line-height: 38px;
+  color: var(--menu-text);
+  font-family: var(--sans);
+  font-size: 13px;
+  text-decoration: none;
+}
+#access a:hover, #access a:focus { background: var(--menu-hover-bg); color: var(--menu-hover-text); }
+
+/* Layout */
+#main { display: flex; gap: 60px; padding: 40px 0 0; }
+#container { flex: 0 0 640px; min-width: 0; }
+#content { margin: 0 0 36px 20px; }
+#primary { flex: 0 0 220px; }
+
+/* Posts */
+.post { margin: 0 0 48px; }
+.entry-title, .page-title {
+  margin: 0;
+  color: var(--heading);
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1.3em;
+}
+.page-title { margin-bottom: 18px; }
+.entry-title a:link, .entry-title a:visited { color: var(--heading); text-decoration: none; }
+.entry-title a:hover { color: var(--link-hover); }
+.entry-meta, .entry-utility, .navigation, .archive-date {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 12px;
+}
+.entry-meta a, .entry-utility a { color: var(--muted); text-decoration: none; }
+.entry-meta a:hover, .entry-utility a:hover { color: var(--link-hover); }
+.author { color: var(--text); }
+.entry-content { clear: both; padding: 12px 0 0; }
+.entry-content p { margin: 0 0 24px; }
+.entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4 {
+  color: var(--heading);
+  line-height: 1.5em;
+  margin: 0 0 20px;
+}
+.entry-content h1 { font-size: 2.1em; }
+.entry-content h2 { font-size: 1.6em; }
+.entry-content h3 { font-size: 1.3em; }
+.entry-content ul, .entry-content ol { margin: 0 0 24px 1.5em; padding: 0; }
+.entry-content blockquote { font-style: italic; padding: 0 3em; margin: 0 0 24px; }
+.entry-content img { max-width: 100%; height: auto; }
+.entry-content hr { border: 0; height: 1px; background: var(--hairline); margin: 0 0 24px; }
+.entry-content table { border: 1px solid var(--hairline); border-collapse: collapse; width: 100%; margin: 0 0 24px; font-size: 14px; }
+.entry-content th, .entry-content td { border-top: 1px solid var(--hairline); padding: 6px 12px; text-align: left; }
+.entry-content th { color: var(--text); font-weight: bold; }
+.entry-content code, .entry-content pre { font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace; font-size: 14px; }
+.entry-content pre { background: #f7f7f7; color: #222; padding: 1.5em; margin: 0 0 24px; overflow: auto; line-height: 1.6; }
+.entry-content mark { background: #fff9c0; color: inherit; }
+.more-link { white-space: nowrap; }
+.entry-utility { clear: both; }
+.meta-sep { margin: 0 4px; }
+
+.navigation { display: flex; justify-content: space-between; gap: 1em; margin: 0 0 36px; line-height: 18px; }
+.navigation a:link, .navigation a:visited { color: var(--muted); text-decoration: none; }
+.navigation a:hover { color: var(--link-hover); }
+.nav-next { margin-left: auto; text-align: right; }
+
+/* Archives / categories */
+.archive-heading { font-size: 16px; color: var(--heading); margin: 24px 0 6px; border-bottom: 1px solid var(--hairline); }
+.archive-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.archive-date { display: inline-block; min-width: 7em; }
+
+/* Sidebar */
+.widget-area { font-size: 13px; line-height: 1.6; }
+.widget-area ul { list-style: none; margin: 0; padding: 0; }
+.widget { margin: 0 0 18px; }
+.widget ul ul { margin-left: 1.3em; list-style: square; color: var(--text); }
+.widget li li { margin: 2px 0; }
+.widget-title {
+  margin: 0 0 4px;
+  color: var(--heading);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: bold;
+}
+.widget-area a:link, .widget-area a:visited { text-decoration: none; }
+.widget-area a:hover { text-decoration: underline; }
+.searchform { display: flex; gap: 4px; }
+.searchform input[type="text"] { flex: 1; min-width: 0; font-size: 13px; }
+
+/* Footer */
+#footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 4px solid var(--rule);
+  margin-top: 0;
+  padding: 18px 0;
+  font-family: var(--sans);
+  font-size: 13px;
+}
+#footer > a { color: var(--heading); font-weight: bold; text-decoration: none; }
+.generator a { color: var(--muted); }
+
+/* Narrow screens: the 2010 fixed layout collapses into one column */
+@media (max-width: 980px) {
+  #wrapper { width: auto; margin: 0; padding: 0 16px; }
+  #site-title, #site-description { float: none; width: auto; }
+  #site-description { margin: 0 0 12px; }
+  #main { flex-direction: column; gap: 12px; padding-top: 24px; }
+  #container, #primary { flex: none; }
+  #content { margin-left: 0; }
+}

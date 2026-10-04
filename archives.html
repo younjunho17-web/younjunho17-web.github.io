@@ -1,0 +1,15 @@
+---
+layout: default
+title: Archives
+permalink: /archives/
+---
+<h1 class="page-title">Archives</h1>
+{% assign months = site.posts | group_by_exp: "p", "p.date | date: '%Y-%m'" %}
+{% for m in months %}
+<h2 class="archive-heading" id="{{ m.name }}">{{ m.items.first.date | date: "%B %Y" }}</h2>
+<ul class="archive-list">
+  {% for p in m.items %}
+  <li><span class="archive-date">{{ p.date | date: "%b %-d" }}</span> <a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}

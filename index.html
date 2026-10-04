@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{% for p in paginator.posts %}
+  {% include entry.html p=p %}
+{% else %}
+  <div class="post"><h2 class="entry-title">Nothing Found</h2><div class="entry-content"><p>아직 글이 없습니다.</p></div></div>
+{% endfor %}
+{% if paginator.total_pages > 1 %}
+<div id="nav-below" class="navigation">
+  {% if paginator.next_page %}<div class="nav-previous"><a href="{{ paginator.next_page_path | relative_url }}"><span class="meta-nav">&larr;</span> Older posts</a></div>{% endif %}
+  {% if paginator.previous_page %}<div class="nav-next"><a href="{{ paginator.previous_page_path | relative_url }}">Newer posts <span class="meta-nav">&rarr;</span></a></div>{% endif %}
+</div>
+{% endif %}

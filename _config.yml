@@ -1,0 +1,33 @@
+title: younjunho
+description: Just another blog
+author: junho
+url: https://younjunho17-web.github.io
+lang: ko
+timezone: Asia/Seoul
+
+permalink: /:year/:month/:day/:title/
+paginate: 10
+paginate_path: /page/:num/
+excerpt_separator: "<!--more-->"
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# 사이드바 Blogroll — 이름과 주소를 자유롭게 고친다.
+blogroll:
+  - name: Notes
+    url: https://younjunho17-web.github.io/Notes/
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - bin
+  - Gemfile
+  - Gemfile.lock
+  - vendor
